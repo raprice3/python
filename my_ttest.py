@@ -130,5 +130,3 @@ def my_ttest(data1='input1',data2='input2',equalvar=True,alpha=0.05,show_pivot=F
         print(f"\t*These results assume unequal variances with {degf_diff:0.0f} degrees of freedom calculated with Welch's method")
 
     print('---------------------------------------------------------------------------\n\n')
-
-print('You successfully loaded the my_ttest function.  Let\'s use it!')
