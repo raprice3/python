@@ -2,9 +2,11 @@
 ## Written 2/26/2022
 ## Not thoroughly debugged...  Will likely update later
 
-def my_ttest(data1='input1',data2='input2',equalvar=True,alpha=0.05,\
-             show_pivot=False,group1_var='none',group2_var='none',\
-             group1_val='none',group2_val='none',test1_var='none',test2_var='none'):
+def my_ttest(data1='input1',data2='input2',equalvar=True,alpha=0.05,show_pivot=False,\
+             group1_var='none',group2_var='none',\
+             group1_val='none',group2_val='none',\
+             test1_var='none',test2_var='none'):
+
     from scipy import stats
     from scipy.stats import norm
     from scipy.stats import t
@@ -13,7 +15,7 @@ def my_ttest(data1='input1',data2='input2',equalvar=True,alpha=0.05,\
     if (type(data1) != str) | (type(data2) != str):
         print("The data1 and data2 input parameters need to be in quotes")
         return
-    
+
     # Create a copy of the input data and name them data1IN and data2IN
     code_to_create_data1=f'data1IN = {data1}.copy()'
     exec(code_to_create_data1,globals())
