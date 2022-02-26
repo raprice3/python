@@ -1,6 +1,4 @@
-## Function for two-sample t-tests with additional output
-## Written 2/26/2022
-## Not thoroughly debugged...  Will likely update later
+# A function to execute a t-test and print results
 
 def my_ttest(data1='input1',data2='input2',equalvar=True,alpha=0.05,show_pivot=False,\
              group1_var='none',group2_var='none',\
@@ -22,7 +20,7 @@ def my_ttest(data1='input1',data2='input2',equalvar=True,alpha=0.05,show_pivot=F
 
     code_to_create_data2=f'data2IN = {data2}.copy()'
     exec(code_to_create_data2,globals())
-    
+
     # We can only do the pivot table analysis if data1 and data2 are both data frames, and the SAME data frame
     if isinstance(data1IN, pd.DataFrame) & isinstance(data2IN, pd.DataFrame):    
         # Run the pivot table and save output to a data frame named df_byregion
@@ -36,9 +34,19 @@ def my_ttest(data1='input1',data2='input2',equalvar=True,alpha=0.05,show_pivot=F
             if show_pivot == True:
                 display(df_pivot)
 
-        # Create subsets of data for group1 and group2 from the pivot tables
-        group1_data = data1IN[(data1IN[group1_var] == group1_val)][test1_var]
-        group2_data = data2IN[(data2IN[group2_var] == group2_val)][test2_var]
+        # Create group1_data and group2_data objects, either the pooled sample if group1_var=none or subsets
+        if (group1_var == 'none') & (test1_var != test2_var):
+            # Use the whole sample, this occurs when test1_var and test2_var are different and group1_var is 'none'
+            group1_data = pd.Series(data1IN[test1_var])
+            group2_data = pd.Series(data2IN[test2_var])
+
+            # set values of group1_val and group2_val if not specified for output, use input data names
+            group1_val=test1_var
+            group2_val=test2_var
+        else:
+            # Create subsets of data for group1 and group2 meeting value criteria
+            group1_data = data1IN[(data1IN[group1_var] == group1_val)][test1_var]
+            group2_data = data2IN[(data2IN[group2_var] == group2_val)][test2_var]
 
     else:
         # If input data are lists, convert to series
@@ -122,3 +130,5 @@ def my_ttest(data1='input1',data2='input2',equalvar=True,alpha=0.05,show_pivot=F
         print(f"\t*These results assume unequal variances with {degf_diff:0.0f} degrees of freedom calculated with Welch's method")
 
     print('---------------------------------------------------------------------------\n\n')
+
+print('You successfully loaded the my_ttest function.  Let\'s use it!')
