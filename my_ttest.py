@@ -42,7 +42,7 @@ def my_ttest(data1='input1',data2='input2',equalvar=True,alpha=0.05,\
         # If input data are lists, convert to series
         if isinstance(data1IN, list):
             group1_data = pd.Series(data1IN)
-        elif isininstance(data1IN, pd.Series):
+        elif isinstance(data1IN, pd.Series):
             group1_data = data1IN.copy()
         else:
             print("Check the data types of your input data.  The types can be two data frames, two lists, or two series.")
@@ -50,14 +50,14 @@ def my_ttest(data1='input1',data2='input2',equalvar=True,alpha=0.05,\
 
         if isinstance(data2IN, list):
             group2_data = pd.Series(data2IN)
-        elif isininstance(data2IN, pd.Series):
+        elif isinstance(data2IN, pd.Series):
             group2_data = data2IN.copy()
         else:
             print("Check the data types of your input data.  The types can be two data frames, two lists, or two series.")
             return
-        # set values of group1_var and group2_var if not specified for output, use input data names
-        group1_var=data1
-        group2_var=data2
+        # set values of group1_val and group2_val if not specified for output, use input data names
+        group1_val=data1
+        group2_val=data2
         # if inputs are series or lists, there is no need for: group1_val, group2_val, test1_var, or test2_var
 
     # calculate means, standard errors, number of observations
